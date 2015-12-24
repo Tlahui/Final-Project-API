@@ -1,0 +1,25 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class PurchaseModel extends CI_Model {
+
+    public function __construct()
+    {
+        // Call the Model constructor
+        parent::__construct();
+        //Connect to database
+        $this->load->database();
+    }
+    
+    
+    public function getInfo($id) {
+    }
+    
+    public function cancel($id) {
+    }
+    
+    public function cancelRequest($id) {
+    }
+    
+    public function get($idPurchase){
+    }
+}
