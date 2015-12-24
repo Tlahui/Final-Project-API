@@ -29,4 +29,20 @@ class ProductModel extends CI_Model {
             return false;
         }
     }
+
+    /**
+    *
+    * Insert new Product
+    *
+    * @author Chiunti
+    * @param  NewProduct|Array 
+    * @return Product Id |Integer
+    */
+    function productInsert($newProduct){
+
+        $this->db->insert("Product",$newProduct);
+        $productID = $this->db->insert_id();
+        return $productID;
+    }
+
 }
