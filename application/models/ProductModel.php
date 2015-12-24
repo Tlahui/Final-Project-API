@@ -31,6 +31,24 @@ class ProductModel extends CI_Model {
     }
 
     /**
+     * Listado de productos en Oferta
+     *
+     * Obtiene un array con los registros de la tabla ProductImage
+     * y en caso que no exista revuelve false
+     *
+     * @author Chiunti
+     * @return Array|boolean
+     */
+    function ProductListFeatured(){
+        $query = $this->db->get_where('Product', array('oferta' => 1));
+        if($query->num_rows()>0){
+            return $query->result_array();
+        }else{
+            return false;
+        }
+    }
+
+    /**
     *
     * Insert new Product
     *
