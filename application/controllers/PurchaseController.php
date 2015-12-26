@@ -22,7 +22,7 @@ class PurchaseController extends CI_Controller {
         }
         else {
             $response["responseStatus"] = "FAIL";
-            $response["message"] = "No se pudo procesar la solicitud";
+            $response["message"] = "No se pudo procesar tu solicitud por el momento";
         }
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
