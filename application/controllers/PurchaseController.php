@@ -29,6 +29,31 @@ class PurchaseController extends CI_Controller {
     /*
      * Funcion para solicitar el listado de compra
      */
-    public function user($idPurchase){
-    }
+    public function user()
+      {
+
+        $response["responseStatus"] = "Not OK";
+
+        $this->load->model("purchasemodel");
+        
+        $userID = $this->input->post("idUser",TRUE);
+        $purchaseID = $this->input->post("idPurchase",TRUE);    
+
+        $result = $this->purchasemodel->purchaseUser($purchaseID, $userID);
+
+      if ($result)
+        {
+          $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode( $result )); 
+        }
+      else
+        {
+          $response["responseStatus"] = "El usuario no ha realizado ninguna compra";
+          $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode( $response )); 
+        }
+
+    } //función
 }
