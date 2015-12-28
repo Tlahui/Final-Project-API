@@ -35,7 +35,6 @@ class UserModel extends CI_Model {
 		
 	}
 
-
     public function usernameIsUnique($username)
     {
         $this->db->where("usuario",$username);
@@ -65,6 +64,20 @@ class UserModel extends CI_Model {
         if ( $found ) {
             $this->db->where("id",$userID);            
             $this->db->update("user",$user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteUser($userID)
+    {
+        $this->db->where("id",$userID);
+        $found = $this->db->get("user")->row();
+
+        if ($found){
+            $this->db->where("id",$userID);
+            $this->db->delete("user");
             return true;
         } else {
             return false;
