@@ -63,4 +63,58 @@ class ProductModel extends CI_Model {
         return $productID;
     }
 
+
+    function productDelete($idProduct)
+    {
+        $this->db->where("id",$idProduct);
+        $this->db->select("id");
+        $found = $this->db->get("Product")->row();
+        if($found)
+        {
+
+            $this->db->where("idProduct",$idProduct);
+            $this->db->select("idProduct");
+            $foundProdCat = $this->db->get("ProductCategory")->row();
+            if($foundProdCat)
+            {
+                $this->db->where('idProduct', $idProduct);
+                $this->db->delete('ProductCategory');
+            }
+
+            $this->db->where("idProduct",$idProduct);
+            $this->db->select("idProduct");
+            $foundProdIma = $this->db->get("ProductImage")->row();
+            if($foundProdIma)
+            {
+                $this->db->where('idProduct', $idProduct);
+                $this->db->delete('ProductImage');
+            }
+
+            $this->db->where("idProduct",$idProduct);
+            $this->db->select("idProduct");
+            $foundProdSize = $this->db->get("ProductSize")->row();
+            if($foundProdSize)
+            {
+                $this->db->where('idProduct', $idProduct);
+                $this->db->delete('ProductSize');
+            }
+
+            $this->db->where("idProduct",$idProduct);
+            $this->db->select("idProduct");
+            $foundProdLike = $this->db->get("ProductLike")->row();
+            if($foundProdLike)
+            {
+                $this->db->where('idProduct', $idProduct);
+                $this->db->delete('ProductLike');
+            }
+
+            $this->db->where('id', $idProduct);
+            $this->db->delete('Product');
+            return true;
+           
+        }
+        return false;
+
+    }
+
 }
