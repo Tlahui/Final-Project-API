@@ -152,7 +152,22 @@ class ProductController extends CI_Controller {
     }
 
     public function delete(){
-
+        $idProduct = $this->input->post("idProduct");
+        $this->load->model("ProductModel");
+        if ($idProduct !== false )
+        {
+            $estatusAccion = $this->ProductModel->productDelete($idProduct);
+            if ($estatusAccion==true) {
+                $response[ "responseStatus" ] = "OK";
+                $response[ "message" ]        = "Producto eliminado correctamente";
+            }
+            else
+            {
+                $response[ "responseStatus" ] = "ERROR";
+                $response[ "message" ]        = "Producto no pudo ser eliminado";
+            }
+        }
+        echo json_encode($response);
     }
 
     public function get($id){
