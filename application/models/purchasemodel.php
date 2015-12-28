@@ -9,17 +9,34 @@ class PurchaseModel extends CI_Model {
         //Connect to database
         $this->load->database();
     }
-    
-    
+
+
     public function getInfo($id) {
+
+        $this->db->select("id as idPurchase, pagoProcesado, referenciaPago as referencia, montoTotal, montoEnvio, idAddress, tipoPago");
+        $result = $this->db->get_where("Purchase",array("id"=>$id))->row();
+        //if ($result->idPurchase === null) return false;////
+        $this->db->select("entreCalles");
+        $idAdd= $result->idAddress;
+        $address = $this->db->get_where("Address",array("id"=>$idAdd))->row();
+        $purchase["idPurchase"]    = $result->idPurchase;
+        $purchase["pagoProcesado"] = $result->pagoProcesado;
+        $purchase["referencia"]    = $result->referencia;
+        $purchase["montoTotal"] = $result->montoTotal;
+        $purchase["montoEnvio"] = $result->montoEnvio;
+        $purchase["entreCalles"] = $address->entreCalles;
+        $purchase["idAdd"] = $idAdd;
+        $purchase["tipoPago"] = $result->tipoPago;
+        return $purchase;
+
     }
-    
+
     public function cancel($id) {
     }
-    
+
     public function cancelRequest($id) {
     }
-    
+
     public function get($idPurchase){
     }
 
