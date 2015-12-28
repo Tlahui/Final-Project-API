@@ -23,4 +23,24 @@ class UserController extends CI_Controller {
 		echo json_encode($response);
 	}
 
+	
+
+	public function delete()
+	{
+		$userID = $this->input->post("id");
+		// load model
+		$this->load->model("usermodel");
+		$resultado = $this->usermodel->deleteUser($userID);
+		//echo $resultado;
+		if(0==$resultado){
+			$response["responseStatus"] = "ID no eliminado - no existe";		
+		}
+		else{
+			$response["responseStatus"] = "Usuario eliminado correctamente";
+		}
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode( $response ));
+	}
+
 }
