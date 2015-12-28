@@ -34,4 +34,40 @@ class UserModel extends CI_Model {
         }
 		
 	}
+
+
+    public function usernameIsUnique($username)
+    {
+        $this->db->where("usuario",$username);
+        $found = $this->db->get("user")->row();
+        if($found)
+        {
+            return false;
+        }
+        return true;
+    }
+    public function emailIsUnique($email)
+    {
+        $this->db->where("correoElectronico",$email);
+        $found = $this->db->get("user")->row();
+        if($found)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public function update($userID,$user)
+    {
+        $this->db->where("id",$userID);        
+        $found = $this->db->get("user")->row();
+
+        if ( $found ) {
+            $this->db->where("id",$userID);            
+            $this->db->update("user",$user);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
