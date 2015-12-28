@@ -21,9 +21,42 @@ class ProductImageController extends CI_Controller {
         $this->load->model('ProductImageModel');
     }
 
-    public function add(){
+    
+       public function add(){
 
-    }
+        $config['upload_path'] = 'uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '100';
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+     
+        $this->load->model("ProductImageModel");
+        $this->load->helper(array('url'));
+        $this->load->library('upload', $config);
+    
+        $response["responseStatus"] = "Error";
+        $productID = $this->input->post("idProduct");
+     
+
+   if (!$this->upload->do_upload('url')){
+            $response['responseStatus'] = "NOT OK";
+             $response["message"] = "Imagen no pudo ser insertada";
+        }
+        else
+        {
+               $dataImage = array('upload_data' => $this->upload->data());
+                $addProductImage = $this->ProductImageModel->AddProductImage($productID, $dataImage["upload_data"]["file_name"]);
+                if($addProductImage){
+                  $response["responseStatus"] = "OK";
+                    $response["message"] = "Imagen insertada correctamente";
+                    $response["url"] = $dataImage["upload_data"]["file_name"];
+                }
+                else{
+                    $response["responseStatus"] = "Error";
+                }               
+        }      
+       $this->output->set_content_type('application/json')->set_output(json_encode($response));
+}
 
     public function get($id){
 
