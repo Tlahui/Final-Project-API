@@ -64,10 +64,15 @@ class ProductModel extends CI_Model {
     }
 
 
-    function productDelete($idProduct)
+    function productEdit($editProducto)
     {
-        $this->db->where("id",$idProduct);
-        $this->db->select("id");
+
+
+        echo "holll:".$editProducto["id"];
+        echo "helellll".$editProducto["id"];
+
+        //$this->db->where("id",$editProducto["id"]);
+/*        $this->db->select("id");
         $found = $this->db->get("Product")->row();
         if($found)
         {
@@ -112,7 +117,7 @@ class ProductModel extends CI_Model {
             $this->db->delete('Product');
             return true;
            
-        }
+        }*/
         return false;
 
     }

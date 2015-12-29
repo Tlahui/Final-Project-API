@@ -148,31 +148,38 @@ class ProductController extends CI_Controller {
 
 
     public function edit(){
+        $response["responseStatus"] = "NOT OK";
+        $editProducto["id"] = $this->input->post("id");
+        $editProducto["name"] = $this->input->post("nombre");
+        $editProducto["precio"] = $this->input->post("precio");
+        $editProducto["idProductCategory"] = $this->input->post("idProductCategory");
+        $editProducto["oferta"] = $this->input->post("oferta");
+        $editProducto["descripcion"] = $this->input->post("descripcion");
 
-        
-
-
-
-    }
-
-    public function delete(){
-        $idProduct = $this->input->post("idProduct");
         $this->load->model("ProductModel");
-        if ($idProduct !== false )
+        if ($editProducto["id"] !== false )
         {
-            $estatusAccion = $this->ProductModel->productDelete($idProduct);
+            $estatusAccion = $this->ProductModel->productEdit($editProducto);
             if ($estatusAccion==true) {
                 $response[ "responseStatus" ] = "OK";
                 $response[ "message" ]        = "Producto eliminado correctamente";
             }
             else
             {
-                $response[ "responseStatus" ] = "ERROR";
+                $response[ "responseStatus" ] = "NOT OK";
                 $response[ "message" ]        = "Producto no pudo ser eliminado";
             }
         }
+        else
+        {
+            $response[ "responseStatus" ] = "NOT OK";
+            $response[ "message" ]        = "No se seleccionó ningún producto";
+        }
         echo json_encode($response);
+
     }
+
+    
 
 
 
