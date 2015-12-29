@@ -34,4 +34,22 @@ class AddressModel extends CI_Model {
         $response["responseStatus"] = "Fail";
         return $response;
 	}
+
+    public function buscar($idAddress)
+    {
+        $this->db->where("id",$idAddress);
+        $this->db->select("id,idUser,idState,identificadorDireccion,calle,exterior,interior,sinNumero,colonia,municipio,codigoPostal,entreCalles");
+        $found = $this->db->get("address")->row();
+        $busqueda = false;
+        if($found)
+            {
+                $busqueda = $found->id;
+            }
+        if ($busqueda !== false)
+            {
+                unset($found->password);
+                return $found;
+            }
+        return false;
+    }
 }
