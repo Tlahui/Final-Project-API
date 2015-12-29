@@ -148,6 +148,41 @@ class ProductController extends CI_Controller {
 
 
     public function edit(){
+        $response["responseStatus"] = "NOT OK";
+        $editProducto["id"] = $this->input->post("id");
+        $editProducto["nombre"] = $this->input->post("nombre");
+        $editProducto["precio"] = $this->input->post("precio");
+        $editProducto["idProductCategory"] = $this->input->post("idProductCategory");
+        $editProducto["oferta"] = $this->input->post("oferta");
+        $editProducto["descripcion"] = $this->input->post("descripcion");
+
+        $this->load->model("ProductModel");
+        if ($editProducto["id"] !== false )
+        {
+            if (is_numeric($editProducto["precio"])) {
+                $productID = $this->ProductModel->productEdit($editProducto);
+                if (!empty($productID)) {
+                    $response[ "responseStatus" ] = "OK";
+                    $response[ "message" ]        = "Producto modificado correctamente";
+                    $response[ "data" ]           = array('id' => $productID);
+                }
+                else
+                {
+                    $response[ "responseStatus" ] = "NOT OK";
+                    $response[ "message" ]        = "Producto no pudo ser modificado";
+                }
+            }
+            else {
+                $response[ "responseStatus" ] = "NOT OK";
+                $response[ "message" ]        = "Ingrese el precio del producto";
+            }
+        }
+        else
+        {
+            $response[ "responseStatus" ] = "NOT OK";
+            $response[ "message" ]        = "No se seleccionó ningún producto";
+        }
+        echo json_encode($response);
 
     }
 
@@ -169,6 +204,7 @@ class ProductController extends CI_Controller {
         }
         echo json_encode($response);
     }
+
 
     public function get($id){
 

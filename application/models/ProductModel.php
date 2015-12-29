@@ -63,6 +63,7 @@ class ProductModel extends CI_Model {
         return $productID;
     }
 
+<<<<<<< HEAD
     function productDelete($idProduct)
     {
         $this->db->where("id",$idProduct);
@@ -141,5 +142,38 @@ class ProductModel extends CI_Model {
             }
         }
         echo json_encode($response);             
+=======
+
+    function productEdit($editProducto)
+    {
+        $editProducto["id"];
+        $this->db->where("id",$editProducto["id"]);
+        $this->db->select("id");
+        $found = $this->db->get("Product")->row();
+          
+        if($found)
+        {
+            $this->db->where("idProduct",$editProducto["id"]);
+            $this->db->select("id");
+            $foundProdCat = $this->db->get("ProductCategory")->row();
+            if($foundProdCat)
+            {
+                $idCategoria=$foundProdCat->id;
+                $this->db->set('idCategory', $editProducto["idProductCategory"]);
+                $this->db->where('id', $idCategoria);
+                $this->db->update('ProductCategory');
+            }
+
+            $this->db->set('nombre', $editProducto["nombre"]);
+            $this->db->set('precio', $editProducto["precio"]);
+            $this->db->set('oferta', $editProducto["oferta"]);
+            $this->db->set('descripcion', $editProducto["descripcion"]);
+            $this->db->where('id', $editProducto["id"]);
+            $this->db->update('Product');
+            return $editProducto["id"];
+           
+        }
+        return 0;
+>>>>>>> Product-Edit
     }
 }
