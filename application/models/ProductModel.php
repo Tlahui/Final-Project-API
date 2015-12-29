@@ -66,19 +66,16 @@ class ProductModel extends CI_Model {
 
     function productEdit($editProducto)
     {
-        echo 'Holl:::'.$editProducto["id"];
+        $editProducto["id"];
         $this->db->where("id",$editProducto["id"]);
         $this->db->select("id");
         $found = $this->db->get("Product")->row();
           
         if($found)
         {
-            //echo '<br>Busca:'.$found->id;
             $this->db->where("idProduct",$editProducto["id"]);
             $this->db->select("id");
             $foundProdCat = $this->db->get("ProductCategory")->row();
-            var_dump($foundProdCat->id);
-
             if($foundProdCat)
             {
                 $idCategoria=$foundProdCat->id;
