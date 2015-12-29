@@ -69,7 +69,8 @@ class ProductModel extends CI_Model {
 
 
         echo "holll:".$editProducto["id"];
-        echo "helellll".$editProducto["id"];
+        echo "helellll".$editProducto["name"];
+        echo "ñañañañ".$editProducto["descripcion"];
 
         //$this->db->where("id",$editProducto["id"]);
 /*        $this->db->select("id");
