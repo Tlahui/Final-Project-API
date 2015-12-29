@@ -8,6 +8,22 @@ class PurchaseController extends CI_Controller {
    * Devuelve un array con informacón y detalles de compra.
   */
     public function get($idPurchase) {
+      $response["responseStatus"] = "FAIL";
+      $response["message"] = "No existe";
+      if(is_numeric($idPurchase) && $idPurchase != 0 ){
+          $this->load->model("PurchaseModel");
+          $purchaseGet = $this->PurchaseModel->getInfo($idPurchase);
+          if($purchaseGet["idPurchase"] != null){
+              $this->output->set_content_type('application/json')->set_output(json_encode( $purchaseGet ));
+          }
+          else {
+              $this->output->set_content_type('application/json')->set_output(json_encode( $response ));
+          }
+      }
+      else {
+          $this->output->set_content_type('application/json')->set_output(json_encode( $response ));
+      }
+
     }
 
     /*
@@ -35,9 +51,9 @@ class PurchaseController extends CI_Controller {
         $response["responseStatus"] = "Not OK";
 
         $this->load->model("purchasemodel");
-        
+
         $userID = $this->input->post("idUser",TRUE);
-        $purchaseID = $this->input->post("idPurchase",TRUE);    
+        $purchaseID = $this->input->post("idPurchase",TRUE);
 
         $result = $this->purchasemodel->purchaseUser($purchaseID, $userID);
 
@@ -45,14 +61,14 @@ class PurchaseController extends CI_Controller {
         {
           $this->output
             ->set_content_type('application/json')
-            ->set_output(json_encode( $result )); 
+            ->set_output(json_encode( $result ));
         }
       else
         {
           $response["responseStatus"] = "El usuario no ha realizado ninguna compra";
           $this->output
             ->set_content_type('application/json')
-            ->set_output(json_encode( $response )); 
+            ->set_output(json_encode( $response ));
         }
 
     } //función
