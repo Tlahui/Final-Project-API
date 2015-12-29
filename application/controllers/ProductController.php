@@ -159,13 +159,12 @@ class ProductController extends CI_Controller {
         $this->load->model("ProductModel");
         if ($editProducto["id"] !== false )
         {
-            if (is_float($editProducto["precio"])) {
-            
+            if (is_numeric($editProducto["precio"])) {
                 $productID = $this->ProductModel->productEdit($editProducto);
                 if (!empty($productID)) {
                     $response[ "responseStatus" ] = "OK";
                     $response[ "message" ]        = "Producto modificado correctamente";
-                    $response[ "data" ]           = $productID;
+                    $response[ "data" ]           = array('id' => $productID);
                 }
                 else
                 {
