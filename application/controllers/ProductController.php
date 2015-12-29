@@ -245,7 +245,12 @@ class ProductController extends CI_Controller {
     }
 
     public function unlike(){
-
+        $idProduct = $this->input->post("idProduct");
+        $idUser = $this->input->post("idUser");
+     
+        $this->load->model("ProductModel");
+        $query = $this->ProductModel->ProductUnLike($idProduct, $idUser);
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
     }
 
 }
