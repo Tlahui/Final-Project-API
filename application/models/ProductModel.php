@@ -66,61 +66,32 @@ class ProductModel extends CI_Model {
 
     function productEdit($editProducto)
     {
-
-
-        echo "holll:".$editProducto["id"];
-        echo "helellll".$editProducto["name"];
-        echo "ñañañañ".$editProducto["descripcion"];
-
-        //$this->db->where("id",$editProducto["id"]);
-/*        $this->db->select("id");
+        $this->db->where("id",$editProducto["id"]);
+        $this->db->select("id");
         $found = $this->db->get("Product")->row();
         if($found)
         {
-
-            $this->db->where("idProduct",$idProduct);
-            $this->db->select("idProduct");
+            $this->db->where("idProduct",$editProducto["id"]);
+            $this->db->select("id");
             $foundProdCat = $this->db->get("ProductCategory")->row();
+            var_dump($foundProdCat);
+
             if($foundProdCat)
             {
-                $this->db->where('idProduct', $idProduct);
-                $this->db->delete('ProductCategory');
+                $this->db->set('idCategory', $editProducto["idProductCategory"]);
+                $this->db->where('id', $foundProdCat['id']);
+                $this->db->update('ProductCategory');
             }
 
-            $this->db->where("idProduct",$idProduct);
-            $this->db->select("idProduct");
-            $foundProdIma = $this->db->get("ProductImage")->row();
-            if($foundProdIma)
-            {
-                $this->db->where('idProduct', $idProduct);
-                $this->db->delete('ProductImage');
-            }
-
-            $this->db->where("idProduct",$idProduct);
-            $this->db->select("idProduct");
-            $foundProdSize = $this->db->get("ProductSize")->row();
-            if($foundProdSize)
-            {
-                $this->db->where('idProduct', $idProduct);
-                $this->db->delete('ProductSize');
-            }
-
-            $this->db->where("idProduct",$idProduct);
-            $this->db->select("idProduct");
-            $foundProdLike = $this->db->get("ProductLike")->row();
-            if($foundProdLike)
-            {
-                $this->db->where('idProduct', $idProduct);
-                $this->db->delete('ProductLike');
-            }
-
-            $this->db->where('id', $idProduct);
-            $this->db->delete('Product');
-            return true;
+            $this->db->set('nombre', $editProducto["nombre"]);
+            $this->db->set('precio', $editProducto["precio"]);
+            $this->db->set('oferta', $editProducto["oferta"]);
+            $this->db->set('descripcion', $editProducto["descripcion"]);
+            $this->db->where('id', $editProducto["id"]);
+            $this->db->update('Product');
+            return $editProducto["id"];
            
-        }*/
-        return false;
-
+        }
+        return 0;
     }
-
 }

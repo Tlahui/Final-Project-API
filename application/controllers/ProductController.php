@@ -150,7 +150,7 @@ class ProductController extends CI_Controller {
     public function edit(){
         $response["responseStatus"] = "NOT OK";
         $editProducto["id"] = $this->input->post("id");
-        $editProducto["name"] = $this->input->post("nombre");
+        $editProducto["nombre"] = $this->input->post("nombre");
         $editProducto["precio"] = $this->input->post("precio");
         $editProducto["idProductCategory"] = $this->input->post("idProductCategory");
         $editProducto["oferta"] = $this->input->post("oferta");
@@ -159,15 +159,23 @@ class ProductController extends CI_Controller {
         $this->load->model("ProductModel");
         if ($editProducto["id"] !== false )
         {
-            $estatusAccion = $this->ProductModel->productEdit($editProducto);
-            if ($estatusAccion==true) {
-                $response[ "responseStatus" ] = "OK";
-                $response[ "message" ]        = "Producto eliminado correctamente";
+            if (is_float($editProducto["precio"])) {
+            
+                $productID = $this->ProductModel->productEdit($editProducto);
+                if (!empty($productID)) {
+                    $response[ "responseStatus" ] = "OK";
+                    $response[ "message" ]        = "Producto modificado correctamente";
+                    $response[ "data" ]           = $productID;
+                }
+                else
+                {
+                    $response[ "responseStatus" ] = "NOT OK";
+                    $response[ "message" ]        = "Producto no pudo ser modificado";
+                }
             }
-            else
-            {
+            else {
                 $response[ "responseStatus" ] = "NOT OK";
-                $response[ "message" ]        = "Producto no pudo ser eliminado";
+                $response[ "message" ]        = "Ingrese el precio del producto";
             }
         }
         else
