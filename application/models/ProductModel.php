@@ -142,4 +142,38 @@ class ProductModel extends CI_Model {
         }
         echo json_encode($response);             
     }
+
+
+ function ProductUnLike($idProduct, $idUser){  
+        $dataProductLike = array(
+            'idProduct' => $idProduct,
+            'idUser' => $idUser);
+
+        $this->db->where('idProduct', $idProduct);
+        $this->db->where('idUser', $idUser);
+        $query = $this->db->get('ProductLike');
+        $response["responseStatus"]= "NOT OK";    //NO existe un like en el producto 
+        
+        if($query->num_rows()!==0){ //Existe relación usuario y producto, entonces elimina like
+             $response["responseStatus"]= "Ok";
+
+            $this->db->where('idProduct', $idProduct);
+            $this->db->where('idUser', $idUser);
+            
+            if( $this->db->delete('ProductLike') ){
+                $count = $this->db->get_where('ProductLike', array('idProduct' => $idProduct))->num_rows;
+                
+                $response["responseStatus"]= 'OK';
+                $response["idProduct"]= $idProduct;
+                $response["idUser"]= $idUser;
+                $response["likes"]= $count;
+                return $response;
+            }
+            else{
+                return false;
+            }
+        }
+        echo json_encode($response);             
+    }
+
 }
