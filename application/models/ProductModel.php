@@ -63,7 +63,7 @@ class ProductModel extends CI_Model {
         return $productID;
     }
 
-<<<<<<< HEAD
+
     function productDelete($idProduct)
     {
         $this->db->where("id",$idProduct);
@@ -142,7 +142,7 @@ class ProductModel extends CI_Model {
             }
         }
         echo json_encode($response);             
-=======
+
 
     function productEdit($editProducto)
     {
@@ -174,6 +174,6 @@ class ProductModel extends CI_Model {
            
         }
         return 0;
->>>>>>> Product-Edit
+
     }
 }
