@@ -52,9 +52,9 @@ class Payment extends CI_Controller {
                         Conekta::setApiKey('key_Fq5U8GUU28hTqgxy4md4TQ');
                        try{
                               $customer = Conekta_Customer::create(array(
-                                        "name"=> "Lews Therin",
-                                        "email"=> "lews.therin@gmail.com",
-                                        "phone"=> "55-5555-5555",
+                                        "name"=> $this->input->post("name"), //"Lews Therin",
+                                        "email"=> $this->input->post("email"), //"lews.therin@gmail.com",
+                                        "phone"=> $this->input->post("phone"), //"55-5555-5555",
                                         "cards"=>  array()   //"tok_a4Ff0dD2xYZZq82d9"
                               ));
 
