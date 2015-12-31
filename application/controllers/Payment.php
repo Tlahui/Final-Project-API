@@ -77,24 +77,24 @@ class Payment extends CI_Controller {
                 try{
                     $plan = Conekta_Plan::create(array(
                         'id' => "tlahui-plan".time(),
-                        'name' => "Tlahui Plan",
-                        'amount' => 100000,
+                        'name' => $this->input->post("name_plan"),
+                        'amount' => $this->input->post("amount"),
                         'currency' => "MXN",
-                        'interval' => "month",
-                        'frequency' => 1,
-                        'trial_period_days' => 30,
-                        'expiry_count' => 12
+                        'interval' => $this->input->post("interval"),
+                        'frequency' => $this->input->post("frequency"),
+                        'trial_period_days' => $this->input->post("trial_period_days"),
+                        'expiry_count' => $this->input->post("expiry_count")
                     ));
                     $customer = Conekta_Customer::create(array(
-                        "name"=> "Lews Therin",
-                        "email"=> "lews.therin@gmail.com",
-                        "phone"=> "55-5555-5555",
+                        "name"=> $this->input->post("name_customer"),
+                        "email"=> $this->input->post("email_customer"),
+                        "phone"=> $this->input->post("phone_customer"),
                         "cards"=>  array()
                     ));
                     $card = $customer->createCard(array('token' => $this->input->post("token")));
                     $subscription = $customer->createSubscription(
                       array(
-                        'plan' => 'tlahui-plan'
+                        'plan' => $plan
                       )
                     );
                     var_dump($subscription);
