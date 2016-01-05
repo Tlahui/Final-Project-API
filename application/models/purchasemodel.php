@@ -49,6 +49,7 @@ class PurchaseModel extends CI_Model {
         else {
             return false;
         }
+        
     }
 
     public function get($idPurchase){
