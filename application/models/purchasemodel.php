@@ -35,6 +35,21 @@ class PurchaseModel extends CI_Model {
     }
 
     public function cancelRequest($id) {
+
+        $data = array(
+            "solicitudCancelacion"=>1
+        );
+
+        $this->db->where("id", $id);
+        $this->db->update("Purchase",$data);
+
+        if ($this->db->affected_rows() >0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+        
     }
 
     public function get($idPurchase){
