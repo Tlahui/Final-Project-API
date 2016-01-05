@@ -39,14 +39,9 @@ class PurchaseController extends CI_Controller {
      * activa a valor 1 el campo  solicitudCancelacion para que el administrador
      * pueda cancelar la compra completa.
      */
+    
     public function cancelrequest() {
-      /*
-     * Funcion para solicitar una cancelación de compra, recibe el idPurchase
-     * activa a valor 1 el campo  solicitudCancelacion para que el administrador
-     * pueda cancelar la compra completa.
-     */
-    public function cancelrequest() {
-      
+
         $idPurchase = $this->input->post("idPurchase");
 
         $response["responseStatus"] = false;
