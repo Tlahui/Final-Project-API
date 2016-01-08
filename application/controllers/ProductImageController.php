@@ -79,7 +79,21 @@ class ProductImageController extends CI_Controller {
     }
 
     public function delete(){
-
+        $idImage = $this->input->post("idImage");
+        if ($idImage !== false )
+        {
+            $estatusAccion = $this->ProductImageModel->imageDelete($idImage);
+            if ($estatusAccion==true) {
+                $response[ "responseStatus" ] = "OK";
+                $response[ "message" ]        = "Imagen eliminada correctamente";
+            }
+            else
+            {
+                $response[ "responseStatus" ] = "FAIL";
+                $response[ "message" ]        = "Imagen no pudo ser eliminada";
+            }
+        }
+        echo json_encode($response);
     }
 
 
