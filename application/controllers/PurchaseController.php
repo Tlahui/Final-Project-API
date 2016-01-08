@@ -37,11 +37,11 @@ class PurchaseController extends CI_Controller {
         $this->load->model("PurchaseModel");
         $canceled = $this->PurchaseModel->cancel($idPurchase);
         if($canceled) {
-            $response["responseStatus"] = "Ok";
+            $response["statusResponse"] = "Ok";
             $response["message"] = "Compra cancelada correctamente";
         }
         else {
-            $response["responseStatus"] = "FAIL";
+            $response["statusResponse"] = "Not Ok";
             $response["message"] = "La compra no pudo ser cancelada";
         }
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
