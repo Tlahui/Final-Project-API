@@ -117,31 +117,32 @@ class ProductModel extends CI_Model {
     }
 
 
- function ProductLike($idProduct, $idUser){  
-        $dataProductLike = array(
-            'idProduct' => $idProduct,
-            'idUser' => $idUser);
+ function ProductLike($idProduct, $idUser)
+ {
+     $dataProductLike = array(
+         'idProduct' => $idProduct,
+         'idUser' => $idUser);
 
-        $this->db->where('idProduct', $idProduct);
-        $this->db->where('idUser', $idUser);
-        $query = $this->db->get('ProductLike');
-        $response["responseStatus"]= "NOT OK";    //ya existe un like en el mismo producto 
-        if($query->num_rows()==0){ //no existe relación usuario y producto, entonces agrego
-             $response["responseStatus"]= "ok";
-            if( $this->db->insert('ProductLike', $dataProductLike)){
-                $count = $this->db->get_where('ProductLike', array('idProduct' => $idProduct))->num_rows;
-                
-                $response["responseStatus"]= 'OK';
-                $response["idProduct"]= $idProduct;
-                $response["idUser"]= $idUser;
-                $response["likes"]= $count;
-                return $response;
-            }
-            else{
-                return false;
-            }
-        }
-        echo json_encode($response);             
+     $this->db->where('idProduct', $idProduct);
+     $this->db->where('idUser', $idUser);
+     $query = $this->db->get('ProductLike');
+     $response["responseStatus"] = "NOT OK";    //ya existe un like en el mismo producto
+     if ($query->num_rows() == 0) { //no existe relación usuario y producto, entonces agrego
+         $response["responseStatus"] = "ok";
+         if ($this->db->insert('ProductLike', $dataProductLike)) {
+             $count = $this->db->get_where('ProductLike', array('idProduct' => $idProduct))->num_rows;
+
+             $response["responseStatus"] = 'OK';
+             $response["idProduct"] = $idProduct;
+             $response["idUser"] = $idUser;
+             $response["likes"] = $count;
+             return $response;
+         } else {
+             return false;
+         }
+     }
+     echo json_encode($response);
+ }
 
 
     function productEdit($editProducto)
@@ -209,5 +210,4 @@ class ProductModel extends CI_Model {
         }
         echo json_encode($response);             
     }
-
 }
