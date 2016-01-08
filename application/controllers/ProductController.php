@@ -239,7 +239,10 @@ class ProductController extends CI_Controller {
     }
 
     public function category($idCategory){
-
+        $idProductCategory = $this->input->get($idCategory);
+        $this->load->model("productCategoryModel");
+        $query = $this->productCategoryModel->productCategory($idCategory);
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
     }
 
     public function like(){
