@@ -210,4 +210,6 @@ class ProductModel extends CI_Model {
         }
         echo json_encode($response);             
     }
+
+
 }
