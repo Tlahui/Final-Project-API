@@ -57,7 +57,12 @@ class ProductImageModel extends CI_Model {
             {
                 return false;
             }
+    }
 
+    function imageDelete($id){
+        $this->db->where('id', $id);
+        $this->db->delete('ProductImage');
+        return true;
     }
 
 }
