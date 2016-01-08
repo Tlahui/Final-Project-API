@@ -33,7 +33,7 @@ class PurchaseController extends CI_Controller {
      */
     public function cancel() {
         $idPurchase = $this->input->post("idPurchase");
-        $response["statusResponse"] = false;
+        $response["statusResponse"] = "NOTOK";
         $this->load->model("PurchaseModel");
         $canceled = $this->PurchaseModel->cancel($idPurchase);
         if($canceled) {
