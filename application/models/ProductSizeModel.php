@@ -61,7 +61,7 @@ class ProductSizeModel extends CI_Model {
     public function listarProductSize( $idProduct ) {
 
         // Un SELECT ... JOIN a la tabla de tallas de productos
-        $this->db->select("idSize, nombre");
+        $this->db->select("idSize, nombre, cantidad");
         $this->db->where("idProduct", $idProduct);
         $this->db->join("size", "productsize.idSize = size.id");
         
