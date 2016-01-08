@@ -83,4 +83,29 @@ class UserModel extends CI_Model {
             return false;
         }
     }
+
+      public function insertuser($user)
+    {
+        $this->db->insert("user",$user);
+        $userID = $this->db->insert_id();
+        return $userID;
+    }
+
+    public function buscar($idUser)
+    {
+        $this->db->where("id",$idUser);
+        $this->db->select("id,correoElectronico,usuario,password,nombre,sexo,fechaNacimiento,direccion,telefono,admin");
+        $found = $this->db->get("user")->row();
+        $busqueda = false;
+        if($found)
+            {
+                $busqueda = $found->id;
+            }
+        if ($busqueda !== false)
+            {
+                unset($found->password);
+                return $found;
+            }
+        return false;
+    }
 }

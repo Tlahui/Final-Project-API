@@ -206,7 +206,15 @@ class ProductController extends CI_Controller {
     }
 
     public function get($id){
-
+         $producto = $this->ProductModel->productGet($id);
+            if($producto){
+                $this->load->model('ProductSizeModel');
+                $tallas = $this->ProductSizeModel->listarProductSize($id);
+                $producto['tallas'] = $tallas;
+                $this->output->set_content_type('application/json')->set_output(json_encode( $producto ));
+            }else{
+                $this->output->set_content_type('application/json')->set_output(json_encode( array('responseStatus'=>'FAIL', 'message'=>'El producto no existe.') ));
+            }
     }
 
     public function featured(){

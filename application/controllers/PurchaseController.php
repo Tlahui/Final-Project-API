@@ -32,6 +32,19 @@ class PurchaseController extends CI_Controller {
      * esta funcion es usada por un usuario administrador
      */
     public function cancel() {
+        $idPurchase = $this->input->post("idPurchase");
+        $response["statusResponse"] = "NOTOK";
+        $this->load->model("PurchaseModel");
+        $canceled = $this->PurchaseModel->cancel($idPurchase);
+        if($canceled) {
+            $response["statusResponse"] = "Ok";
+            $response["message"] = "Compra cancelada correctamente";
+        }
+        else {
+            $response["statusResponse"] = "Not Ok";
+            $response["message"] = "La compra no pudo ser cancelada";
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
 
     /*
@@ -39,8 +52,27 @@ class PurchaseController extends CI_Controller {
      * activa a valor 1 el campo  solicitudCancelacion para que el administrador
      * pueda cancelar la compra completa.
      */
+    
     public function cancelrequest() {
+
+        $idPurchase = $this->input->post("idPurchase");
+
+        $response["responseStatus"] = false;
+
+        $this->load->model("PurchaseModel");
+        $updated = $this->PurchaseModel->cancelRequest($idPurchase);
+
+        if($updated) {
+            $response["responseStatus"] = "Ok";
+            $response["message"] = "Solicitud de cancelacion exitosa";
+        }
+        else {
+            $response["responseStatus"] = "FAIL";
+            $response["message"] = "No se pudo procesar la solicitud";
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
+    
 
     /*
      * Funcion para solicitar el listado de compra
