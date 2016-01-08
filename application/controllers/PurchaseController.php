@@ -32,6 +32,19 @@ class PurchaseController extends CI_Controller {
      * esta funcion es usada por un usuario administrador
      */
     public function cancel() {
+        $idPurchase = $this->input->post("idPurchase");
+        $response["statusResponse"] = "NOTOK";
+        $this->load->model("PurchaseModel");
+        $canceled = $this->PurchaseModel->cancel($idPurchase);
+        if($canceled) {
+            $response["statusResponse"] = "Ok";
+            $response["message"] = "Compra cancelada correctamente";
+        }
+        else {
+            $response["statusResponse"] = "Not Ok";
+            $response["message"] = "La compra no pudo ser cancelada";
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
 
     /*
