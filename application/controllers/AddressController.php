@@ -35,4 +35,22 @@ class AddressController extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode( $response ));	
 	}
+
+	public function delete()
+	{
+		$idAdress = $this->input->post("id");
+		// load model
+		$this->load->model("AddressModel");
+		$resultado = $this->AddressModel->delete($idAdress);
+		//echo $resultado;
+		if(0==$resultado){
+			$response["responseStatus"] = "No existe";		
+		}
+		else{
+			$response["responseStatus"] = "dirección eliminada correctamente";
+		}
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode( $response ));
+	}
 }

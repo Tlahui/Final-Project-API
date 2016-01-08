@@ -52,4 +52,18 @@ class AddressModel extends CI_Model {
             }
         return false;
     }
+
+    public function delete($idAdress)
+    {
+        $this->db->where("id",$idAdress);
+        $found = $this->db->get("address")->row();
+
+        if ($found){
+            $this->db->where("id",$idAdress);
+            $this->db->delete("address");
+            return true;
+        } else {
+            return false;
+        }   
+    }
 }
