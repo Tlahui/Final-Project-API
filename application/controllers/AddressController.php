@@ -53,4 +53,41 @@ class AddressController extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode( $response ));
 	}
+
+	public function add() {
+
+		$response["responseStatus"] = "Not OK";
+
+		// Las variables que obtenemos del post las ponemos en un array
+		$newUser["calle"] = $this->input->post("calle");
+		$newUser["colonia"] = $this->input->post("colonia");
+		$newUser["exterior"] = $this->input->post("exterior");
+		$newUser["sinNumero"] = $this->input->post("sinNumero");
+		$newUser["interior"] = $this->input->post("interior");
+		$newUser["entrecalles"] = $this->input->post("entreCalles");
+		$newUser["codigoPostal"] = $this->input->post("codigoPostal");
+		$newUser["municipio"] = $this->input->post("municipio");
+
+		// Activamos el model (archivo php) que contiene las funciones
+		// que usaremos adelante
+		$this->load->model("usermodel");
+
+		// Insertamos siempre debido a que se pueden enviar los productos de diferentes usarios a una misma dirección.
+		
+		$response["userID"] = $this->usermodel->insertuser($newUser);
+		$response["responseStatus"] = "OK";
+		$response["responseStatus"] = "Dirección Insertado Correctamente";
+
+		// Regresamos la respuesta en formato JSON
+		//echo json_encode($response);
+		// Según la documentación, ésta es la manera en que debemos
+		// regresar el json... y con ésta función me respeta el UTF8
+		// a diferencia del echo...
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode( $response ));		
+
+	}
+
+
 }
