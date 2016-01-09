@@ -11,7 +11,6 @@ class AddressController extends CI_Controller {
 		$response["direccion"] = $this->AddressModel->allAddress($userID);
 		echo json_encode($response);
 	}
-
 	public function get()
 	{
 		// Obtenemos los datos que envío el post
@@ -35,7 +34,6 @@ class AddressController extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode( $response ));	
 	}
-
 	public function delete()
 	{
 		$idAdress = $this->input->post("id");
@@ -53,11 +51,8 @@ class AddressController extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode( $response ));
 	}
-
 	public function add() {
-
 		$response["responseStatus"] = "Not OK";
-
 		// Las variables que obtenemos del post las ponemos en un array
 		$newUser["calle"] = $this->input->post("calle");
 		$newUser["colonia"] = $this->input->post("colonia");
@@ -67,23 +62,14 @@ class AddressController extends CI_Controller {
 		$newUser["entrecalles"] = $this->input->post("entreCalles");
 		$newUser["codigoPostal"] = $this->input->post("codigoPostal");
 		$newUser["municipio"] = $this->input->post("municipio");
-
 		// Activamos el model (archivo php) que contiene las funciones
 		// que usaremos adelante
 		$this->load->model("usermodel");
-
 		// Insertamos siempre debido a que se pueden enviar los productos de diferentes usarios a una misma dirección.
-
+		
 		$response["userID"] = $this->usermodel->insertuser($newUser);
-
-		if( $response["userID"] == true ) {
-			$response["responseStatus"] = "OK";
-			$response["responseStatus"] = "Dirección Insertado Correctamente";
-		}
-		else {
-			$response["responseStatus"] = "Dirección no pudo ser insertada";
-		}
-
+		$response["responseStatus"] = "OK";
+		$response["responseStatus"] = "Dirección Insertado Correctamente";
 		// Regresamos la respuesta en formato JSON
 		//echo json_encode($response);
 		// Según la documentación, ésta es la manera en que debemos
@@ -92,10 +78,9 @@ class AddressController extends CI_Controller {
 		$this->output
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode( $response ));		
-
 	}
 
-	public function edit()
+		public function edit()
 	{
 		$response["responseStatus"] = "Not OK";
 		// Las variables que obtenemos del post las ponemos en un array
@@ -137,7 +122,4 @@ class AddressController extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode( $response ));
 	}
-
-/* ???? */
-
 }
