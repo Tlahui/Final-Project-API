@@ -33,6 +33,41 @@ class PurchaseController extends CI_Controller {
      */
     public function cancel() {
     }
+    
+     /*
+     * Funcion que agrega
+     */
+     public function add(){
+
+     $newPurchase["idAddress"]=$this->input->post("idAddress");
+     $newPurchase["tipoPago"]=$this->input->post("tipoPago");
+     $newPurchase["montoTotal"]=$this->input->post("montoTotal");
+     $newPurchase["montoEnvio"]=$this->input->post("montoEnvio");
+     $newPurchase["referenciaPago"]=$this->input->post("referenciaPago");
+     $newPurchase["pagoProcesado"]=$this->input->post("pagoProcesado");
+     $newPurchase["solicitudCancelacion"]=$this->input->post("solicitudCancelacion");
+             $this->load->model("PurchaseModel");
+      
+
+
+
+       if($this->input->post("montoTotal")!=0){
+           $id=$this->PurchaseModel->insertPurchase($newPurchase);
+             $response["responseStatus"]="OK";
+             $response["message"]="Compra Exitosa";
+             $response['id']=$id;
+         
+        }else{
+            
+            $response["responseStatus"]= "FAIL";
+            $response["message"]="No se pudo realizar compra";
+
+        }
+         
+      
+     echo json_encode($response);
+
+    }
 
     /*
      * Funcion para solicitar una cancelación de compra, recibe el idPurchase

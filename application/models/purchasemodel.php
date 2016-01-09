@@ -30,6 +30,12 @@ class PurchaseModel extends CI_Model {
         return $purchase;
 
     }
+      function insertPurchase($Purchase){
+
+        $this->db->insert("Purchase",$Purchase);
+        $PurchaseID=$this->db->insert_id();
+        return $PurchaseID;
+    }
 
     public function cancel($id) {
     }
