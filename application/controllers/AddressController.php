@@ -54,7 +54,7 @@ class AddressController extends CI_Controller {
 		    ->set_output(json_encode( $response ));
 	}
 
-	public function add() {
+public function add() {
 
 		$response["responseStatus"] = "Not OK";
 
@@ -73,10 +73,16 @@ class AddressController extends CI_Controller {
 		$this->load->model("usermodel");
 
 		// Insertamos siempre debido a que se pueden enviar los productos de diferentes usarios a una misma dirección.
-		
+
 		$response["userID"] = $this->usermodel->insertuser($newUser);
-		$response["responseStatus"] = "OK";
-		$response["responseStatus"] = "Dirección Insertado Correctamente";
+
+		if( $response["userID"] == true ) {
+			$response["responseStatus"] = "OK";
+			$response["responseStatus"] = "Dirección Insertado Correctamente";
+		}
+		else {
+			$response["responseStatus"] = "Dirección no pudo ser insertada";
+		}
 
 		// Regresamos la respuesta en formato JSON
 		//echo json_encode($response);
