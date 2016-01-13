@@ -48,11 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'tlahui';
-$db['default']['dbdriver'] = 'mysqli';
+$db['default']['hostname'] = 'dbinstance.cnocmsczkjuk.us-west-2.rds.amazonaws.com';
+$db['default']['username'] = 'awsuser';
+$db['default']['password'] = 'awspassword';
+$db['default']['database'] = 'tlahuidb';
+$db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

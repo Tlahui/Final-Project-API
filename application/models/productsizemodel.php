@@ -63,10 +63,10 @@ class ProductSizeModel extends CI_Model {
         // Un SELECT ... JOIN a la tabla de tallas de productos
         $this->db->select("idSize, nombre, cantidad");
         $this->db->where("idProduct", $idProduct);
-        $this->db->join("size", "productsize.idSize = size.id");
+        $this->db->join("Size", "ProductSize.idSize = size.id");
         
         // Regresamos todos los registros que encuentre 
-        $products = $this->db->get("productsize")->result_array();
+        $products = $this->db->get("ProductSize")->result_array();
         
         return $products;
         
@@ -106,7 +106,7 @@ class ProductSizeModel extends CI_Model {
         );  
         
         // Insertamos una nueva cantidad de un producto y talla
-        $this->db->insert("productsize",$data);
+        $this->db->insert("ProductSize",$data);
         
         // Regresamos el valor como estaba
         $this->db->db_debug = $orig_db_debug;
@@ -131,7 +131,7 @@ class ProductSizeModel extends CI_Model {
         if ( $idSize != 0 ) {
             $this->db->where("idSize",$idSize);
         }
-        $this->db->delete("productsize");
+        $this->db->delete("ProductSize");
 
         // Regresamos las líneas afectadas por el DELETE
         // 0 significará que no se borró nada       

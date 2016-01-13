@@ -74,11 +74,11 @@ class PurchaseModel extends CI_Model {
     {
 
         $this->db->select("purchase.id as idPurchase, idAddress, tipoPago, montoTotal, montoEnvio, referenciaPago, pagoProcesado, idUser, entreCalles");
-        $this->db->from("purchase");
+        $this->db->from("Purchase");
         $this->db->join("address", "address.id = purchase.idAddress");
-        $this->db->where("purchase.id",$purchaseID);
+        $this->db->where("Purchase.id",$purchaseID);
         $this->db->where("idUser",$userID);
-        $result=$this->db->get("user")->row();
+        $result=$this->db->get("User")->row();
 
         if($result)
         {
