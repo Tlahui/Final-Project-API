@@ -23,7 +23,7 @@ class UserModel extends CI_Model {
 	public function listar()
 	{
 		$this->db->select("id, correoElectronico, usuario, password, nombre, fechaNacimiento, direccion, telefono, admin");
-		$user = $this->db->get("user")->result();
+		$user = $this->db->get("User")->result();
         if($user)
         {
             return $user;
@@ -38,7 +38,7 @@ class UserModel extends CI_Model {
     public function usernameIsUnique($username)
     {
         $this->db->where("usuario",$username);
-        $found = $this->db->get("user")->row();
+        $found = $this->db->get("User")->row();
         if($found)
         {
             return false;
@@ -48,7 +48,7 @@ class UserModel extends CI_Model {
     public function emailIsUnique($email)
     {
         $this->db->where("correoElectronico",$email);
-        $found = $this->db->get("user")->row();
+        $found = $this->db->get("User")->row();
         if($found)
         {
             return false;
@@ -59,11 +59,11 @@ class UserModel extends CI_Model {
     public function update($userID,$user)
     {
         $this->db->where("id",$userID);        
-        $found = $this->db->get("user")->row();
+        $found = $this->db->get("User")->row();
 
         if ( $found ) {
             $this->db->where("id",$userID);            
-            $this->db->update("user",$user);
+            $this->db->update("User",$user);
             return true;
         } else {
             return false;
@@ -73,11 +73,11 @@ class UserModel extends CI_Model {
     public function deleteUser($userID)
     {
         $this->db->where("id",$userID);
-        $found = $this->db->get("user")->row();
+        $found = $this->db->get("User")->row();
 
         if ($found){
             $this->db->where("id",$userID);
-            $this->db->delete("user");
+            $this->db->delete("User");
             return true;
         } else {
             return false;
@@ -86,7 +86,7 @@ class UserModel extends CI_Model {
 
       public function insertuser($user)
     {
-        $this->db->insert("user",$user);
+        $this->db->insert("User",$user);
         $userID = $this->db->insert_id();
         return $userID;
     }
@@ -95,7 +95,7 @@ class UserModel extends CI_Model {
     {
         $this->db->where("id",$idUser);
         $this->db->select("id,correoElectronico,usuario,password,nombre,sexo,fechaNacimiento,direccion,telefono,admin");
-        $found = $this->db->get("user")->row();
+        $found = $this->db->get("User")->row();
         $busqueda = false;
         if($found)
             {

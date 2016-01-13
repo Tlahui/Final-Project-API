@@ -25,7 +25,7 @@ class AddressModel extends CI_Model {
        
         $this->db->select("id, calle, colonia, exterior, sinNumero, interior, entreCalles, codigoPostal, municipio");
 		$this->db->where("idUser",$userID);
-        $availability = $this->db->get("address")->result();
+        $availability = $this->db->get("Address")->result();
         if($availability)
         {
             return $availability;
@@ -39,7 +39,7 @@ class AddressModel extends CI_Model {
     {
         $this->db->where("id",$idAddress);
         $this->db->select("id,idUser,idState,identificadorDireccion,calle,exterior,interior,sinNumero,colonia,municipio,codigoPostal,entreCalles");
-        $found = $this->db->get("address")->row();
+        $found = $this->db->get("Address")->row();
         $busqueda = false;
         if($found)
             {
@@ -56,11 +56,11 @@ class AddressModel extends CI_Model {
     public function delete($idAdress)
     {
         $this->db->where("id",$idAdress);
-        $found = $this->db->get("address")->row();
+        $found = $this->db->get("Address")->row();
 
         if ($found){
             $this->db->where("id",$idAdress);
-            $this->db->delete("address");
+            $this->db->delete("Address");
             return true;
         } else {
             return false;
