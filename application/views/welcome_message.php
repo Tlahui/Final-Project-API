@@ -94,7 +94,7 @@
     <div style="margin: 0 auto; width: 300px;">
         <ul>
             <li><a href="/user_guide/">Documentación CodeIgniter</a></li>
-            <li><a href="/tlahuidoc/">Documentación Proyecto</a></li>
+            <li><a href="/TlahuiDoc/">Documentación Proyecto</a></li>
         </ul>
     </div>
 </div>
