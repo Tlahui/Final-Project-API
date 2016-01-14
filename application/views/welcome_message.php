@@ -59,29 +59,44 @@
 	
 	#container{
 		margin: 10px;
+        padding: 10px;
 		border: 1px solid #D0D0D0;
 		-webkit-box-shadow: 0 0 8px #D0D0D0;
 	}
+    ul{
+        text-decoration: none;
+        list-style: none;
+    }
+    ul li a{
+        display: block;
+        background: #995300;
+        color: #ffffff;
+        text-decoration: none;
+        text-align: center;
+        padding: 5px 10px;
+        margin: 5px;
+    }
+    ul li a:hover{
+        background: #ca8a04;
+    }
+
 	</style>
 </head>
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+    <div style="margin: 0 auto;" align="center"><img width="200" src="https://raw.githubusercontent.com/Tlahui/TlahuiAPI/master/Tlahui.png" alt="Tlahui"/></div>
+    <div style="margin: 0 auto; width: 500px; border: 1px solid #c0c0c0; padding: 10px; text-align: center;">
+        <h2>UAG - Tecnologías de internet.</h2>
+        <h3>Proyecto Final Negocios electrónicos.</h3>
+        <p>Elaboración de una API REST, que se integré con servicios de pago electrónico y montado sobre Amazon Web Services.</p>
+    </div>
+    <div style="margin: 0 auto; width: 300px;">
+        <ul>
+            <li><a href="/user_guide/">Documentación CodeIgniter</a></li>
+            <li><a href="/tlahuidoc/">Documentación Proyecto</a></li>
+        </ul>
+    </div>
 </div>
 
 </body>
